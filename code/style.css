@@ -469,25 +469,13 @@ a:visited {
 	}
 }
 
-@media (orientation:landscape){
-	.navbar {
-		margin-left: 0;
-		background-color: rgba(13, 13, 13, 0.804);
-		z-index: 0;
-	}
-
-	.vertical-separator {
-		display: unset;
-	}
-}
-
 .block-selection {
 	user-select: none;
 }
 
 .cover {
 	flex-grow: 1;
-	background-color: rgba(55, 55, 55, 0.155);
+	background-color: rgba(30, 30, 30, 0.536);
 	position: absolute;
 	z-index: 1;
 	display: none;

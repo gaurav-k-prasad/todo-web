@@ -27,6 +27,7 @@ let noCompletedTask = document.querySelector("#no-completed-task");
 let noImportantTask = document.querySelector("#no-important-task");
 let loader = document.querySelector("#preloader");
 let cover = document.querySelector(".cover");
+let landscape = window.matchMedia("(orientation: landscape)");
 
 let activityUrl = "https://www.boredapi.com/api/activity";
 
@@ -34,6 +35,25 @@ let activityUrl = "https://www.boredapi.com/api/activity";
 let todoList = [];
 let importantList = [];
 let completedList = [];
+
+// ? Solution of navbar click in portrait and then going to landscape causing issue
+landscape.addEventListener("change", function (e) {
+	if (e.matches && navbar.classList.contains("slide-out")) {
+		let navbarClasses = navbar.classList;
+		cover.setAttribute("style", "display:none");
+		cover.classList.remove("cover-activate");
+
+		if (!navbarClasses.contains("slide-in")) {
+			navbarClasses.toggle("slide-in");
+			// !
+			if (navbarClasses.contains("slide-out")) {
+				navbarClasses.toggle("slide-out");
+			}
+			menu.classList.toggle("display-none");
+			navbarClasses.remove("slide-in");
+		}
+	}
+});
 
 // * Functions
 async function getActivity() {
@@ -323,8 +343,8 @@ menu.addEventListener("click", () => {
 	let navbarClasses = navbar.classList;
 
 	if (!navbarClasses.contains("slide-out")) {
-		cover.setAttribute("style", "display:unset")
-		cover.classList.add("cover-activate")
+		cover.setAttribute("style", "display:unset");
+		cover.classList.add("cover-activate");
 
 		menu.classList.toggle("display-none");
 		navbarClasses.toggle("slide-out");
@@ -338,7 +358,7 @@ menu.addEventListener("click", () => {
 navClose.addEventListener("click", () => {
 	let navbarClasses = navbar.classList;
 	cover.setAttribute("style", "display:none");
-	cover.classList.remove("cover-activate")
+	cover.classList.remove("cover-activate");
 
 	if (!navbarClasses.contains("slide-in")) {
 		navbarClasses.toggle("slide-in");
@@ -395,7 +415,7 @@ todo.addEventListener("click", () => {
 
 cover.addEventListener("click", () => {
 	navClose.click();
-})
+});
 
 // * -----------------------------
 // ? Loading
