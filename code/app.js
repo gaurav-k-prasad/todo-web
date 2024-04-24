@@ -26,6 +26,7 @@ let completedTasks = document.querySelector(".completed .left-panel-task-list");
 let noCompletedTask = document.querySelector("#no-completed-task");
 let noImportantTask = document.querySelector("#no-important-task");
 let loader = document.querySelector("#preloader");
+let cover = document.querySelector(".cover");
 
 let activityUrl = "https://www.boredapi.com/api/activity";
 
@@ -320,11 +321,11 @@ content.addEventListener("scroll", () => {
 // ? menu click
 menu.addEventListener("click", () => {
 	let navbarClasses = navbar.classList;
-	// if (!container.classList.contains("stop-clicks")) {
-	// 	container.classList.add("stop-clicks");
-	// }
+
 	if (!navbarClasses.contains("slide-out")) {
-		// !
+		cover.setAttribute("style", "display:unset")
+		cover.classList.add("cover-activate")
+
 		menu.classList.toggle("display-none");
 		navbarClasses.toggle("slide-out");
 		if (navbarClasses.contains("slide-in")) {
@@ -336,9 +337,9 @@ menu.addEventListener("click", () => {
 // ? X clicked
 navClose.addEventListener("click", () => {
 	let navbarClasses = navbar.classList;
-	// if (container.classList.contains("stop-clicks")) {
-	// 	container.classList.remove("stop-clicks");
-	// }
+	cover.setAttribute("style", "display:none");
+	cover.classList.remove("cover-activate")
+
 	if (!navbarClasses.contains("slide-in")) {
 		navbarClasses.toggle("slide-in");
 		// !
@@ -391,6 +392,10 @@ todo.addEventListener("click", () => {
 		navClose.click();
 	}
 });
+
+cover.addEventListener("click", () => {
+	navClose.click();
+})
 
 // * -----------------------------
 // ? Loading
