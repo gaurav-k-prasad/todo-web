@@ -39,19 +39,7 @@ let completedList = [];
 // ? Solution of navbar click in portrait and then going to landscape causing issue
 landscape.addEventListener("change", function (e) {
 	if (e.matches && navbar.classList.contains("slide-out")) {
-		let navbarClasses = navbar.classList;
-		cover.setAttribute("style", "display:none");
-		cover.classList.remove("cover-activate");
-
-		if (!navbarClasses.contains("slide-in")) {
-			navbarClasses.toggle("slide-in");
-			// !
-			if (navbarClasses.contains("slide-out")) {
-				navbarClasses.toggle("slide-out");
-			}
-			menu.classList.toggle("display-none");
-			navbarClasses.remove("slide-in");
-		}
+		navBarClosing(0);
 	}
 });
 
@@ -82,6 +70,24 @@ async function mainCheckForEmpty() {
 		nothing.classList.remove("nothing-view");
 		content.style.flexDirection = "column";
 		content.style.justifyContent = "start";
+	}
+}
+
+function navBarClosing(time = 250) {
+	let navbarClasses = navbar.classList;
+	cover.setAttribute("style", "display:none");
+	cover.classList.remove("cover-activate");
+
+	if (!navbarClasses.contains("slide-in")) {
+		navbarClasses.toggle("slide-in");
+		// !
+		if (navbarClasses.contains("slide-out")) {
+			navbarClasses.toggle("slide-out");
+		}
+		setTimeout(() => {
+			menu.classList.toggle("display-none");
+			navbarClasses.remove("slide-in");
+		}, time);
 	}
 }
 
@@ -413,6 +419,7 @@ todo.addEventListener("click", () => {
 	}
 });
 
+// ? close nav bar when clicked out of focus
 cover.addEventListener("click", () => {
 	navClose.click();
 });
