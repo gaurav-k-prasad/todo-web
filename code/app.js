@@ -13,6 +13,7 @@ let menu = document.querySelector("#menu");
 let navbar = document.querySelector(".navbar");
 let navClose = document.querySelector("#close");
 let container = document.querySelector(".container");
+let theme = document.querySelector(".theme-icon");
 let importantTasks = document.querySelector(
 	".important-tasks .left-panel-task-list"
 );
@@ -422,6 +423,20 @@ todo.addEventListener("click", () => {
 // ? close nav bar when clicked out of focus
 cover.addEventListener("click", () => {
 	navClose.click();
+});
+
+// ? Change theme
+theme.addEventListener("click", () => {
+	if (theme.classList.contains("light")) {
+		theme.src = "./assets/dark.png";
+		theme.classList.remove("light");
+		theme.classList.add("dark");
+	} else if (theme.classList.contains("dark")) {
+		theme.src = "./assets/light.png";
+		theme.classList.remove("dark");
+		theme.classList.add("light");
+	}
+	document.body.classList.toggle("light-theme")
 });
 
 // * -----------------------------
