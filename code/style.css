@@ -469,3 +469,11 @@ a:visited {
 		background-size: 75%;
 	}
 }
+
+.stop-clicks {
+	pointer-events: none;
+}
+
+.block-selection {
+	user-select: none;
+}

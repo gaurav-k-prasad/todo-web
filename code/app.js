@@ -218,8 +218,10 @@ addButton.addEventListener("click", () => {
 
 // ? Enter Click add
 addInput.addEventListener("keydown", (event) => {
-	if (event.code == "Enter") {
-		addTaskDom(getValue());
+	if (!navbar.classList.contains("slide-out")) {
+		if (event.code == "Enter") {
+			addTaskDom(getValue());
+		}
 	}
 });
 
@@ -257,10 +259,12 @@ content.addEventListener("click", (event) => {
 
 // ? Focus with "Slash"
 html.addEventListener("keydown", (event) => {
-	if (event.code == "Slash") {
-		setTimeout(() => {
-			addInput.focus();
-		}, 0);
+	if (!navbar.classList.contains("slide-out")) {
+		if (event.code == "Slash") {
+			setTimeout(() => {
+				addInput.focus();
+			}, 0);
+		}
 	}
 });
 
@@ -316,6 +320,9 @@ content.addEventListener("scroll", () => {
 // ? menu click
 menu.addEventListener("click", () => {
 	let navbarClasses = navbar.classList;
+	// if (!container.classList.contains("stop-clicks")) {
+	// 	container.classList.add("stop-clicks");
+	// }
 	if (!navbarClasses.contains("slide-out")) {
 		// !
 		menu.classList.toggle("display-none");
@@ -329,6 +336,9 @@ menu.addEventListener("click", () => {
 // ? X clicked
 navClose.addEventListener("click", () => {
 	let navbarClasses = navbar.classList;
+	// if (container.classList.contains("stop-clicks")) {
+	// 	container.classList.remove("stop-clicks");
+	// }
 	if (!navbarClasses.contains("slide-in")) {
 		navbarClasses.toggle("slide-in");
 		// !
@@ -372,6 +382,13 @@ completedTasks.addEventListener("click", (event) => {
 navbar.addEventListener("click", (event) => {
 	if (event.target.classList.contains("add-icon")) {
 		addTaskDom(event.target.parentElement.innerText);
+	}
+});
+
+// ? close navbar on clicking anywhere
+todo.addEventListener("click", () => {
+	if (navbar.classList.contains("slide-out")) {
+		navClose.click();
 	}
 });
 
