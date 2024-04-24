@@ -470,9 +470,9 @@ a:visited {
 	}
 }
 
-.stop-clicks {
+/* .stop-clicks {
 	pointer-events: none;
-}
+} */
 
 .block-selection {
 	user-select: none;
