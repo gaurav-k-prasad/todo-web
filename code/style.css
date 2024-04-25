@@ -26,8 +26,9 @@
 	--left-panel-task: #7979797b;
 	--ph-clr: #ffffff8c;
 	--text-clr: white;
-	--highlight-clr: rgb(173 182 0 / 94%);
-	--highlight-clr: rgba(0, 124, 37, 0.562);
+	/* --highlight-clr: rgb(173 182 0 / 94%); */
+	/* --highlight-clr: rgba(0, 124, 37, 0.562); */
+	--highlight-clr: #955000;
 	--icon-clr: white;
 	--main-hr-clr: #ffffff72;
 	--secondary-hr-clr: #ffffff33;
@@ -266,6 +267,7 @@ body {
 	border: 3px solid var(--check-wrapper-border-clr);
 	border-radius: 50%;
 	user-select: none;
+	background-color: var(--task-bg-clr);
 }
 
 .check-wrapper > img {
