@@ -29,16 +29,20 @@
 	--highlight-clr: rgb(173 182 0 / 94%);
 	--highlight-clr: rgba(0, 124, 37, 0.562);
 	--icon-clr: white;
-	--main-hr-clr : #ffffff72;
+	--main-hr-clr: #ffffff72;
 	--secondary-hr-clr: #ffffff33;
 	--left-panel-border-clr: transparent;
 	--bottom-height: 46px;
-	--vertical-sep-border-clr : #717171bc;
-	--resize-indicator-clr : white;
+	--vertical-sep-border-clr: #717171bc;
+	--resize-indicator-clr: white;
+	--check-wrapper-border-clr: rgba(255, 255, 255, 0.79);
+	--tick-primary: 1;
+	--tick-secondary: 0;
+	--check-bg-clr: white;
 }
 
 .light-theme {
-	--vertical-sep-clr : rgb(248, 252, 255);
+	--vertical-sep-clr: rgb(248, 252, 255);
 	--nav-media-q: rgba(237, 247, 255, 0.75);
 	--bg-bg-clr: white;
 	--nav-tasks: rgb(218, 236, 255);
@@ -58,12 +62,16 @@
 	--icon-clr: rgb(80, 80, 80);
 	--highlight-clr: rgba(242, 255, 0, 0.94);
 	--highlight-clr: rgb(157, 209, 255);
-	--main-hr-clr : #6c6c6c96;
+	--main-hr-clr: #6c6c6c96;
 	--secondary-hr-clr: #08080823;
 	--left-panel-border-clr: rgb(202, 202, 202);
 	--bottom-height: 46px;
-	--vertical-sep-border-clr : #7171716f;
-	--resize-indicator-clr : #000;
+	--vertical-sep-border-clr: #7171716f;
+	--resize-indicator-clr: #000;
+	--check-wrapper-border-clr: rgb(82, 82, 82);
+	--tick-primary: 0;
+	--tick-secondary: 1;
+	--check-bg-clr: rgb(80, 80, 80);
 }
 
 body {
@@ -238,8 +246,9 @@ body {
 }
 
 .task-text {
+	flex-grow: 1;
 	font-size: 1.1rem;
-	width: 100%;
+	/* width: 100%; */
 	text-align: start;
 	text-overflow: ellipsis;
 }
@@ -250,14 +259,38 @@ body {
 	word-break: break-word;
 }
 
-.done {
+.check-wrapper {
 	width: 1.2rem;
-	aspect-ratio: 1/1;
-	cursor: pointer;
-	/* ! */
-	/* appearance: none;
-    border: 2px solid black;
-    border-radius: 50%; */
+	height: 1.2rem;
+	aspect-ratio: 1;
+	border: 3px solid var(--check-wrapper-border-clr);
+	border-radius: 50%;
+	user-select: none;
+}
+
+.check-wrapper > img {
+	width: 0.7rem;
+	height: 0.7rem;
+	position: relative;
+	bottom: 0.31rem;
+	opacity: 0;
+	filter: invert(var(--tick-primary));
+}
+
+.check-wrapper:hover > img {
+	opacity: 0.6;
+}
+
+.check-wrapper-bg-change {
+	background-color: var(--check-bg-clr);
+}
+
+.check-tick-clr-change {
+	filter: invert(var(--tick-secondary)) !important;
+}
+
+.opacity-1 {
+	opacity: 1 !important;
 }
 
 .delete-task {
@@ -583,7 +616,7 @@ a:visited {
 	width: 1px;
 	height: 100svh;
 	opacity: 0;
-	transition: .25s;
+	transition: 0.25s;
 }
 
 .vertical-separator:hover > .resize-indicator {

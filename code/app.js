@@ -30,6 +30,8 @@ let noImportantTask = document.querySelector("#no-important-task");
 let loader = document.querySelector("#preloader");
 let cover = document.querySelector(".cover");
 let landscape = window.matchMedia("(orientation: landscape)");
+let checkWrapper = document.querySelector(".check-wrapper");
+let tick = document.querySelector(".tick");
 
 let activityUrl = "https://www.boredapi.com/api/activity";
 
@@ -58,7 +60,6 @@ async function getActivity() {
 }
 
 async function mainCheckForEmpty() {
-	console.log(nothing.classList);
 	if (todoList.length === 0 && !nothing.classList.contains("nothing-view")) {
 		content.style.flexDirection = "row";
 		let recActivity = await getActivity();
@@ -70,7 +71,6 @@ async function mainCheckForEmpty() {
 		todoList.length !== 0 &&
 		nothing.classList.contains("nothing-view")
 	) {
-		console.log("enter");
 		nothing.classList.remove("nothing-view");
 		content.style.flexDirection = "column";
 		content.style.justifyContent = "start";
@@ -161,9 +161,13 @@ function addTaskDom(input) {
 		todoList.push(input);
 		let task = document.createElement("div");
 		task.classList.add("task");
-		let checkbox = document.createElement("input");
-		checkbox.className = "done";
-		checkbox.setAttribute("type", "checkbox");
+		let check = document.createElement("div");
+		check.className = "check-wrapper";
+		let tick = document.createElement("img");
+		tick.src = "../assets/check.png";
+		tick.classList.add("tick");
+		check.appendChild(tick);
+
 		let taskText = document.createElement("span");
 		taskText.innerText = input;
 		taskText.classList.add("task-text", "breaking-text");
@@ -174,7 +178,7 @@ function addTaskDom(input) {
 		let trash = document.createElement("i");
 		trash.classList.add("fa-solid", "fa-trash", "delete-task");
 
-		task.appendChild(checkbox);
+		task.appendChild(check);
 		task.appendChild(taskText);
 		task.appendChild(outlineStar);
 		task.appendChild(trash);
@@ -244,7 +248,7 @@ function initResizerFn(resizer, sidebar) {
 	}
 
 	function rs_mousemoveHandler(e) {
-		let dx
+		let dx;
 		if (e.clientX) dx = e.clientX - x;
 		else dx = e.touches[0].clientX - x;
 
@@ -259,7 +263,7 @@ function initResizerFn(resizer, sidebar) {
 		document.removeEventListener("mouseup", rs_mouseupHandler);
 		document.removeEventListener("mousemove", rs_mousemoveHandler);
 		document.removeEventListener("touchend", rs_mouseupHandler);
-		document.removeEventListener("touchmove", rs_mousemoveHandler)
+		document.removeEventListener("touchmove", rs_mousemoveHandler);
 		document.body.classList.remove("block-selection");
 	}
 
@@ -285,7 +289,6 @@ for (let element of allImportantTasks) {
 }
 impCheckForEmpty();
 
-
 // * Event Listeners
 
 // ? Button Click Add
@@ -302,18 +305,32 @@ addInput.addEventListener("keydown", (event) => {
 	}
 });
 
-// ? Completed .done
+// ? completed task
 content.addEventListener("click", (event) => {
 	completedSound.pause();
 	completedSound.currentTime = 0;
-	if (event.target.classList.contains("done")) {
-		// console.log("enter");
+	if (event.target.classList.contains("check-wrapper")) {
+		event.target.classList.add("check-wrapper-bg-change");
+		event.target.children[0].classList.add("check-tick-clr-change", "opacity-1");
 		removeFromTodoList(event.target.parentElement.innerText);
 		completedList.push(event.target.parentElement.innerText);
 		addCompletedDom(event.target.parentElement.innerText);
 		comCheckForEmpty();
 		setTimeout(() => {
 			event.target.parentElement.remove();
+			completedSound.play();
+			mainCheckForEmpty();
+			checkArrow();
+		}, 200);
+	} else if (event.target.classList.contains("tick")) {
+		event.target.parentElement.classList.add("check-wrapper-bg-change");
+		event.target.classList.add("check-tick-clr-change",  "opacity-1");
+		removeFromTodoList(event.target.parentElement.parentElement.innerText);
+		completedList.push(event.target.parentElement.parentElement.innerText);
+		addCompletedDom(event.target.parentElement.parentElement.innerText);
+		comCheckForEmpty();
+		setTimeout(() => {
+			event.target.parentElement.parentElement.remove();
 			completedSound.play();
 			mainCheckForEmpty();
 			checkArrow();
@@ -477,11 +494,11 @@ cover.addEventListener("click", () => {
 // ? Change theme
 theme.addEventListener("click", () => {
 	if (theme.classList.contains("light")) {
-		theme.src = "./assets/dark.png";
+		theme.src = "../assets/dark.png";
 		theme.classList.remove("light");
 		theme.classList.add("dark");
 	} else if (theme.classList.contains("dark")) {
-		theme.src = "./assets/light.png";
+		theme.src = "../assets/light.png";
 		theme.classList.remove("dark");
 		theme.classList.add("light");
 	}
