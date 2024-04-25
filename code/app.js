@@ -164,7 +164,7 @@ function addTaskDom(input) {
 		let check = document.createElement("div");
 		check.className = "check-wrapper";
 		let tick = document.createElement("img");
-		tick.src = "../assets/check.png";
+		tick.src = "./assets/check.png";
 		tick.classList.add("tick");
 		check.appendChild(tick);
 
@@ -494,11 +494,11 @@ cover.addEventListener("click", () => {
 // ? Change theme
 theme.addEventListener("click", () => {
 	if (theme.classList.contains("light")) {
-		theme.src = "../assets/dark.png";
+		theme.src = "./assets/dark.png";
 		theme.classList.remove("light");
 		theme.classList.add("dark");
 	} else if (theme.classList.contains("dark")) {
-		theme.src = "../assets/light.png";
+		theme.src = "./assets/light.png";
 		theme.classList.remove("dark");
 		theme.classList.add("light");
 	}
