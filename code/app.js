@@ -24,6 +24,7 @@ let allCompletedTasks = document.querySelectorAll(
 	".completed .left-panel-task-list .left-panel-task"
 );
 let completedTasks = document.querySelector(".completed .left-panel-task-list");
+let verticalSeparator = document.querySelector(".vertical-separator");
 let noCompletedTask = document.querySelector("#no-completed-task");
 let noImportantTask = document.querySelector("#no-important-task");
 let loader = document.querySelector("#preloader");
@@ -197,6 +198,7 @@ function addCompletedDom(inputText) {
 	completedTasks.appendChild(task);
 	completedTasks.scrollTop = content.scrollHeight;
 }
+
 function addImportantDom(inputText) {
 	if (importantList.indexOf(inputText) === -1) {
 		importantList.push(inputText);
@@ -220,6 +222,49 @@ function addImportantDom(inputText) {
 	}
 }
 
+function initResizerFn(resizer, sidebar) {
+	// Tracker current mouse position in x var
+	let x, w;
+
+	function rs_mousedownHandler(e) {
+		if (e.clientX) x = e.clientX;
+		else x = e.touches[0].clientX;
+
+		let sbWidth = window.getComputedStyle(sidebar).width;
+		w = parseInt(sbWidth);
+
+		document.addEventListener("touchmove", rs_mousemoveHandler);
+		document.addEventListener("touchend", rs_mouseupHandler);
+
+		document.addEventListener("mousemove", rs_mousemoveHandler);
+		document.addEventListener("mouseup", rs_mouseupHandler);
+		document.body.classList.add("block-selection");
+	}
+
+	function rs_mousemoveHandler(e) {
+		let dx
+		if (e.clientX) dx = e.clientX - x;
+		else dx = e.touches[0].clientX - x;
+
+		let cw = w + dx;
+		if (cw < 400 && cw > 250) {
+			sidebar.style.width = `${cw}px`;
+		}
+	}
+
+	function rs_mouseupHandler() {
+		// remove event mouse up && mouseup
+		document.removeEventListener("mouseup", rs_mouseupHandler);
+		document.removeEventListener("mousemove", rs_mousemoveHandler);
+		document.removeEventListener("touchend", rs_mouseupHandler);
+		document.removeEventListener("touchmove", rs_mousemoveHandler)
+		document.body.classList.remove("block-selection");
+	}
+
+	resizer.addEventListener("mousedown", rs_mousedownHandler);
+	resizer.addEventListener("touchstart", rs_mousedownHandler);
+}
+
 // * Flow
 for (let task of tasks) {
 	todoList.push(task.querySelector(".task-text").innerText);
@@ -236,6 +281,7 @@ for (let element of allImportantTasks) {
 mainCheckForEmpty();
 impCheckForEmpty();
 comCheckForEmpty();
+initResizerFn(verticalSeparator, navbar);
 
 // * Event Listeners
 
@@ -436,7 +482,7 @@ theme.addEventListener("click", () => {
 		theme.classList.remove("dark");
 		theme.classList.add("light");
 	}
-	document.body.classList.toggle("light-theme")
+	document.body.classList.toggle("light-theme");
 });
 
 // * -----------------------------
