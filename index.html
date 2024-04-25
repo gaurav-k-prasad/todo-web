@@ -28,7 +28,7 @@
             <div class="left-panel-tasks important-tasks">
                 <h2 class="block-selection">Important Tasks</h2>
                 <div class="left-panel-task-list">
-                    <p id="no-important-task" class="block-selection">No Important Tasks?</p>
+                    <p id="no-important-task" class="block-selection display-none">No Important Tasks?</p>
                 </div>
 
             </div>
@@ -37,7 +37,7 @@
             <div class="left-panel-tasks completed">
                 <h2 class="block-selection">Completed</h2>
                 <div class="left-panel-task-list">
-                    <p id="no-completed-task" class="block-selection">Do something man...</p>
+                    <p id="no-completed-task" class="block-selection display-none">Do something man...</p>
                 </div>
             </div>
             <hr style="margin-bottom: 4px;" class="secondary-hr">
@@ -64,9 +64,15 @@
             <div class="todo">
 
                 <div class="content">
-                    <p class="nothing block-selection">Got nothing to do?</p>
+                    <p class="nothing block-selection nothing-view">Got nothing to do?</p>
                     <div id="up-arrow">
                         <img src="./assets/arrow.png" alt="up">
+                    </div>
+                    <div class="task">
+                        <input type="checkbox" class="done">
+                        <span class="task-text breaking-text">Text</span>
+                        <i class="fa-regular fa-star star"></i>
+                        <i class="fa-solid fa-trash delete-task"></i>
                     </div>
                     <!-- ? Task goes here -->
                 </div>

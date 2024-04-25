@@ -58,6 +58,7 @@ async function getActivity() {
 }
 
 async function mainCheckForEmpty() {
+	console.log(nothing.classList);
 	if (todoList.length === 0 && !nothing.classList.contains("nothing-view")) {
 		content.style.flexDirection = "row";
 		let recActivity = await getActivity();
@@ -69,6 +70,7 @@ async function mainCheckForEmpty() {
 		todoList.length !== 0 &&
 		nothing.classList.contains("nothing-view")
 	) {
+		console.log("enter");
 		nothing.classList.remove("nothing-view");
 		content.style.flexDirection = "column";
 		content.style.justifyContent = "start";
@@ -266,22 +268,23 @@ function initResizerFn(resizer, sidebar) {
 }
 
 // * Flow
+initResizerFn(verticalSeparator, navbar);
+
 for (let task of tasks) {
 	todoList.push(task.querySelector(".task-text").innerText);
 }
+mainCheckForEmpty();
 
 for (let element of allCompletedTasks) {
 	completedList.push(element.innerText);
 }
+comCheckForEmpty();
 
 for (let element of allImportantTasks) {
 	importantList.push(element.innerText);
 }
-
-mainCheckForEmpty();
 impCheckForEmpty();
-comCheckForEmpty();
-initResizerFn(verticalSeparator, navbar);
+
 
 // * Event Listeners
 
