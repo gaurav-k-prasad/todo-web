@@ -54,7 +54,7 @@
 	--add-input-focus: rgb(235, 240, 255);
 	--review-us-clr: rgb(94, 94, 94);
 	--outline-clr: white;
-	--scroll-clr: white;
+	--scroll-clr: rgb(196, 196, 196);
 	--left-panel-task: rgb(239, 243, 255);
 	--ph-clr: rgb(133, 133, 133);
 	--text-clr: black;
@@ -329,9 +329,57 @@ body {
 		0px 0px 2px #000, 0px 0px 2px #000, 0px 0px 2px #000, 0px 0px 2px #000; */
 }
 
-#up-arrow {
+.up-arrow {
+	width: 2.2rem;
+	height: 2.2rem;
+	aspect-ratio: 1;
+	position: absolute;
+	top: 4rem;
+	right: 1rem;
+	padding: 0.4rem;
+	border-radius: 50%;
+	display: none;
+	/* background-color: #1fa01f; */
+}
+
+.arrow-holder {
+	width: 1.65rem;
+	height: 1.65rem;
+	aspect-ratio: 1;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -51%);
+	background-color: #5fb8f0;
+	border-radius: 50%;
+}
+
+.arrow-holder > img {
+	position: absolute;
+	top: 48%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 1.2rem;
+	height: 1.2rem;
+}
+
+/* #up-arrow {
 	width: 30px;
 	height: 30px;
+	position: absolute;
+	top: 4rem;
+	right: 1rem;
+	border: 1px solid black;
+	padding: 4px;
+	border-radius: 50%;
+	background-color: #5fb8f0;
+	display: none;
+	cursor: pointer;
+}
+
+#progress-bar {
+	width: 40px;
+	height: 40px;
 	position: absolute;
 	top: 4rem;
 	right: 1rem;
@@ -346,7 +394,7 @@ body {
 #up-arrow img {
 	width: 20px;
 	height: 20px;
-}
+} */
 
 #menu {
 	position: absolute;

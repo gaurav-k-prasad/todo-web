@@ -8,7 +8,7 @@ let completedSound = new Audio("../../todo-web/assets/completed.mp3");
 let deleteSound = new Audio("../../todo-web/assets/delete.mp3");
 let nothing = document.querySelector(".nothing");
 let tasks = document.querySelectorAll(".task");
-let upArrow = document.querySelector("#up-arrow");
+let upArrow = document.querySelector(".up-arrow");
 let menu = document.querySelector("#menu");
 let navbar = document.querySelector(".navbar");
 let navClose = document.querySelector("#close");
@@ -39,6 +39,7 @@ let activityUrl = "https://www.boredapi.com/api/activity";
 let todoList = [];
 let importantList = [];
 let completedList = [];
+let scrollPercent;
 
 // ? Solution of navbar click in portrait and then going to landscape causing issue
 landscape.addEventListener("change", function (e) {
@@ -146,11 +147,18 @@ function getValue() {
 }
 
 function checkArrow() {
-		if (content.scrollTop > 50) {
-			upArrow.style.display = "unset";
-		} else {
-			upArrow.style.display = "none";
-		}
+	if (content.scrollTop > 10) {
+		upArrow.style.display = "unset";
+		scrollPercent = Math.round(
+			(content.scrollTop * 100) /
+				(content.scrollHeight - content.clientHeight)
+		);
+
+		upArrow.style.background = `conic-gradient(#1fa01f ${scrollPercent}%, #bbb ${scrollPercent}%)`;
+		console.log(scrollPercent);
+	} else {
+		upArrow.style.display = "none";
+	}
 }
 
 function addTaskDom(input) {
@@ -308,7 +316,10 @@ content.addEventListener("click", (event) => {
 	completedSound.currentTime = 0;
 	if (event.target.classList.contains("check-wrapper")) {
 		event.target.classList.add("check-wrapper-bg-change");
-		event.target.children[0].classList.add("check-tick-clr-change", "opacity-1");
+		event.target.children[0].classList.add(
+			"check-tick-clr-change",
+			"opacity-1"
+		);
 		removeFromTodoList(event.target.parentElement.innerText);
 		completedList.push(event.target.parentElement.innerText);
 		addCompletedDom(event.target.parentElement.innerText);
@@ -321,7 +332,7 @@ content.addEventListener("click", (event) => {
 		}, 200);
 	} else if (event.target.classList.contains("tick")) {
 		event.target.parentElement.classList.add("check-wrapper-bg-change");
-		event.target.classList.add("check-tick-clr-change",  "opacity-1");
+		event.target.classList.add("check-tick-clr-change", "opacity-1");
 		removeFromTodoList(event.target.parentElement.parentElement.innerText);
 		completedList.push(event.target.parentElement.parentElement.innerText);
 		addCompletedDom(event.target.parentElement.parentElement.innerText);
