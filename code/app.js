@@ -146,14 +146,11 @@ function getValue() {
 }
 
 function checkArrow() {
-	setTimeout(() => {
-		if (content.scrollTop !== 0) {
+		if (content.scrollTop > 50) {
 			upArrow.style.display = "unset";
 		} else {
 			upArrow.style.display = "none";
 		}
-		// console.log("running");
-	}, 100);
 }
 
 function addTaskDom(input) {
