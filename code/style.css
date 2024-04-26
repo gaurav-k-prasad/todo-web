@@ -71,6 +71,7 @@
 	--tick-primary: 0;
 	--tick-secondary: 1;
 	--check-bg-clr: rgb(80, 80, 80);
+	--check-bg-clr: #32c932;
 }
 
 body {
@@ -352,6 +353,8 @@ body {
 	transform: translate(-50%, -51%);
 	background-color: #5fb8f0;
 	border-radius: 50%;
+	border: 1px solid rgb(184, 184, 184);
+	/* border: 2px solid white; */
 }
 
 .arrow-holder > img {

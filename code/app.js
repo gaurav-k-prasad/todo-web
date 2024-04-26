@@ -85,6 +85,7 @@ function navBarClosing(time = 250) {
 
 	if (!navbarClasses.contains("slide-in")) {
 		navbarClasses.toggle("slide-in");
+		
 		// !
 		if (navbarClasses.contains("slide-out")) {
 			navbarClasses.toggle("slide-out");
@@ -154,7 +155,7 @@ function checkArrow() {
 				(content.scrollHeight - content.clientHeight)
 		);
 
-		upArrow.style.background = `conic-gradient(#1fa01f ${scrollPercent}%, #bbb ${scrollPercent}%)`;
+		upArrow.style.background = `conic-gradient(#32c932 ${scrollPercent}%, #bbb ${scrollPercent}%)`;
 		console.log(scrollPercent);
 	} else {
 		upArrow.style.display = "none";
