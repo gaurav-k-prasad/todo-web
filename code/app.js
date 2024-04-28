@@ -136,7 +136,9 @@ function comCheckForEmpty() {
 }
 
 function removeFromTodoList(word) {
-	todoList.splice(todoList.indexOf(word), 1);
+	let elementIndex = todoList.indexOf(word);
+	if (elementIndex != -1)
+		todoList.splice(elementIndex, 1);
 	// console.log(todoList);
 }
 
@@ -156,7 +158,7 @@ function checkArrow() {
 		);
 
 		upArrow.style.background = `conic-gradient(#32c932 ${scrollPercent}%, #bbb ${scrollPercent}%)`;
-		console.log(scrollPercent);
+		// console.log(scrollPercent);
 	} else {
 		upArrow.style.display = "none";
 	}
@@ -208,7 +210,7 @@ function addCompletedDom(inputText) {
 	task.appendChild(taskText);
 	task.appendChild(trash);
 	completedTasks.appendChild(task);
-	completedTasks.scrollTop = content.scrollHeight;
+	completedTasks.scrollTop = completedTasks.scrollHeight;
 }
 
 function addImportantDom(inputText) {
@@ -321,28 +323,28 @@ content.addEventListener("click", (event) => {
 			"check-tick-clr-change",
 			"opacity-1"
 		);
-		removeFromTodoList(event.target.parentElement.innerText);
-		completedList.push(event.target.parentElement.innerText);
-		addCompletedDom(event.target.parentElement.innerText);
-		comCheckForEmpty();
+		completedSound.play();
 		setTimeout(() => {
+			removeFromTodoList(event.target.parentElement.innerText);
+			completedList.push(event.target.parentElement.innerText);
+			addCompletedDom(event.target.parentElement.innerText);
 			event.target.parentElement.remove();
-			completedSound.play();
 			mainCheckForEmpty();
 			checkArrow();
+			comCheckForEmpty();
 		}, 200);
 	} else if (event.target.classList.contains("tick")) {
 		event.target.parentElement.classList.add("check-wrapper-bg-change");
 		event.target.classList.add("check-tick-clr-change", "opacity-1");
-		removeFromTodoList(event.target.parentElement.parentElement.innerText);
-		completedList.push(event.target.parentElement.parentElement.innerText);
-		addCompletedDom(event.target.parentElement.parentElement.innerText);
-		comCheckForEmpty();
+		completedSound.play();
 		setTimeout(() => {
+			removeFromTodoList(event.target.parentElement.parentElement.innerText);
+			completedList.push(event.target.parentElement.parentElement.innerText);
+			addCompletedDom(event.target.parentElement.parentElement.innerText);
 			event.target.parentElement.parentElement.remove();
-			completedSound.play();
 			mainCheckForEmpty();
 			checkArrow();
+			comCheckForEmpty();
 		}, 200);
 	}
 });
@@ -524,3 +526,8 @@ window.addEventListener("load", () => {
 		loader.classList.add("display-none");
 	}, 950);
 });
+
+setInterval(() => {
+	console.log(todoList);
+	console.log(todoList.length);
+}, 200);
