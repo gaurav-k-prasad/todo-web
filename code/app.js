@@ -535,8 +535,3 @@ window.addEventListener("load", () => {
 		loader.classList.add("display-none");
 	}, 950);
 });
-
-setInterval(() => {
-	console.log(todoList);
-	console.log(todoList.length);
-}, 200);
