@@ -130,6 +130,8 @@ body {
 #title {
 	padding-top: 0.5rem;
 	background-color: var(--title-clr);
+	min-height: 3.3rem;
+	max-height: 3.3rem;
 	height: 3.3rem;
 }
 

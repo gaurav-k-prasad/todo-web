@@ -32,6 +32,7 @@ let cover = document.querySelector(".cover");
 let landscape = window.matchMedia("(orientation: landscape)");
 let checkWrapper = document.querySelector(".check-wrapper");
 let tick = document.querySelector(".tick");
+let isListening = true;
 
 let activityUrl = "https://www.boredapi.com/api/activity";
 
@@ -318,34 +319,42 @@ content.addEventListener("click", (event) => {
 	completedSound.pause();
 	completedSound.currentTime = 0;
 	if (event.target.classList.contains("check-wrapper")) {
-		event.target.classList.add("check-wrapper-bg-change");
-		event.target.children[0].classList.add(
-			"check-tick-clr-change",
-			"opacity-1"
-		);
-		completedSound.play();
-		setTimeout(() => {
-			removeFromTodoList(event.target.parentElement.innerText);
-			completedList.push(event.target.parentElement.innerText);
-			addCompletedDom(event.target.parentElement.innerText);
-			event.target.parentElement.remove();
-			mainCheckForEmpty();
-			checkArrow();
-			comCheckForEmpty();
-		}, 200);
+		if (isListening) {
+			isListening = false;
+			event.target.classList.add("check-wrapper-bg-change");
+			event.target.children[0].classList.add(
+				"check-tick-clr-change",
+				"opacity-1"
+			);
+			completedSound.play();
+			setTimeout(() => {
+				isListening = true;
+				removeFromTodoList(event.target.parentElement.innerText);
+				completedList.push(event.target.parentElement.innerText);
+				addCompletedDom(event.target.parentElement.innerText);
+				event.target.parentElement.remove();
+				mainCheckForEmpty();
+				checkArrow();
+				comCheckForEmpty();
+			}, 200);
+		}
 	} else if (event.target.classList.contains("tick")) {
-		event.target.parentElement.classList.add("check-wrapper-bg-change");
-		event.target.classList.add("check-tick-clr-change", "opacity-1");
-		completedSound.play();
-		setTimeout(() => {
-			removeFromTodoList(event.target.parentElement.parentElement.innerText);
-			completedList.push(event.target.parentElement.parentElement.innerText);
-			addCompletedDom(event.target.parentElement.parentElement.innerText);
-			event.target.parentElement.parentElement.remove();
-			mainCheckForEmpty();
-			checkArrow();
-			comCheckForEmpty();
-		}, 200);
+		if (isListening) {
+			isListening = false;
+			event.target.parentElement.classList.add("check-wrapper-bg-change");
+			event.target.classList.add("check-tick-clr-change", "opacity-1");
+			completedSound.play();
+			setTimeout(() => {
+				isListening = true;
+				removeFromTodoList(event.target.parentElement.parentElement.innerText);
+				completedList.push(event.target.parentElement.parentElement.innerText);
+				addCompletedDom(event.target.parentElement.parentElement.innerText);
+				event.target.parentElement.parentElement.remove();
+				mainCheckForEmpty();
+				checkArrow();
+				comCheckForEmpty();
+			}, 200);
+		}
 	}
 });
 
