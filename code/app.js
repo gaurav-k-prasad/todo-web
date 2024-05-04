@@ -50,6 +50,11 @@ landscape.addEventListener("change", function (e) {
 });
 
 // * Functions
+
+function remToPixels(rem) {    
+    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+}
+
 async function getActivity() {
 	try {
 		let res = await axios.get(activityUrl);
@@ -262,8 +267,9 @@ function initResizerFn(resizer, sidebar) {
 		else dx = e.touches[0].clientX - x;
 
 		let cw = w + dx;
-		if (cw < 400 && cw > 250) {
-			sidebar.style.width = `${cw}px`;
+		if (cw < remToPixels(25) && cw > remToPixels(13.5)) {
+			sidebar.style.minWidth = `${cw}px`;
+			sidebar.style.maxWidth = `${cw}px`;
 		}
 	}
 
@@ -498,6 +504,8 @@ navbar.addEventListener("click", (event) => {
 		addTaskDom(event.target.parentElement.innerText);
 	}
 });
+
+
 
 // ? close navbar on clicking anywhere
 todo.addEventListener("click", () => {

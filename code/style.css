@@ -189,7 +189,7 @@ body {
 	border: 0;
 	font-size: 1.1rem;
 	border: 1px solid grey;
-	padding-right: 63px;
+	padding-right: 4em;
 }
 
 #add-input:focus {
@@ -236,11 +236,10 @@ body {
 	border: 1px solid rgba(0, 0, 0, 0.485);
 	width: 100%;
 	display: flex;
-	padding: 10px;
+	padding: 0.78rem 0.625rem;
 	align-items: center;
 	background-color: var(--task-bg-clr);
-	height: fit-content;
-	min-height: 3rem;
+	min-height: max-content;
 	gap: 10px;
 	border-radius: 5px;
 	align-items: center;
@@ -252,7 +251,6 @@ body {
 	font-size: 1.1rem;
 	/* width: 100%; */
 	text-align: start;
-	text-overflow: ellipsis;
 }
 
 .breaking-text {
@@ -416,9 +414,9 @@ body {
 }
 
 .navbar {
-	/* min-width: 20rem;
-	max-width: 20rem; */
 	height: 100svh;
+	min-width: 20rem;
+	max-width: 20rem;
 	width: 20rem;
 	background-color: var(--nav-clr);
 	position: relative;
@@ -613,8 +611,8 @@ a:visited {
 		margin-left: -20rem;
 		background-color: var(--nav-media-q);
 		z-index: 2;
-		min-width: 20rem;
-		max-width: 20rem;
+		min-width: 20rem !important;
+		max-width: 20rem !important;
 	}
 
 	.vertical-separator {
