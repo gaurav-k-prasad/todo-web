@@ -660,6 +660,11 @@ a:visited {
 	width: 1.75rem;
 	opacity: 0.75;
 	aspect-ratio: 1;
+	transition: all 0.2s;
+}
+
+.theme-icon:hover {
+	opacity: 1;
 }
 
 .resize-indicator {
