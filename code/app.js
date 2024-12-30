@@ -4,8 +4,8 @@ let content = document.querySelector(".content");
 let todo = document.querySelector(".todo");
 let html = document.querySelector("html");
 let body = document.querySelector("body");
-let completedSound = new Audio("../../todo-web/assets/completed.mp3");
-let deleteSound = new Audio("../../todo-web/assets/delete.mp3");
+let completedSound = new Audio("./assets/completed.mp3");
+let deleteSound = new Audio("./assets/delete.mp3");
 let nothing = document.querySelector(".nothing");
 let tasks = document.querySelectorAll(".task");
 let upArrow = document.querySelector(".up-arrow");
@@ -34,7 +34,7 @@ let checkWrapper = document.querySelector(".check-wrapper");
 let tick = document.querySelector(".tick");
 let isListening = true;
 
-let activityUrl = "https://www.boredapi.com/api/activity";
+let activityUrl = "https://bored-api.appbrewery.com/random";
 
 // * Lists
 let todoList = [];
@@ -51,8 +51,10 @@ landscape.addEventListener("change", function (e) {
 
 // * Functions
 
-function remToPixels(rem) {    
-    return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+function remToPixels(rem) {
+	return (
+		rem * parseFloat(getComputedStyle(document.documentElement).fontSize)
+	);
 }
 
 async function getActivity() {
@@ -91,7 +93,7 @@ function navBarClosing(time = 250) {
 
 	if (!navbarClasses.contains("slide-in")) {
 		navbarClasses.toggle("slide-in");
-		
+
 		// !
 		if (navbarClasses.contains("slide-out")) {
 			navbarClasses.toggle("slide-out");
@@ -143,8 +145,7 @@ function comCheckForEmpty() {
 
 function removeFromTodoList(word) {
 	let elementIndex = todoList.indexOf(word);
-	if (elementIndex != -1)
-		todoList.splice(elementIndex, 1);
+	if (elementIndex != -1) todoList.splice(elementIndex, 1);
 	// console.log(todoList);
 }
 
@@ -352,9 +353,15 @@ content.addEventListener("click", (event) => {
 			completedSound.play();
 			setTimeout(() => {
 				isListening = true;
-				removeFromTodoList(event.target.parentElement.parentElement.innerText);
-				completedList.push(event.target.parentElement.parentElement.innerText);
-				addCompletedDom(event.target.parentElement.parentElement.innerText);
+				removeFromTodoList(
+					event.target.parentElement.parentElement.innerText
+				);
+				completedList.push(
+					event.target.parentElement.parentElement.innerText
+				);
+				addCompletedDom(
+					event.target.parentElement.parentElement.innerText
+				);
 				event.target.parentElement.parentElement.remove();
 				mainCheckForEmpty();
 				checkArrow();
@@ -504,8 +511,6 @@ navbar.addEventListener("click", (event) => {
 		addTaskDom(event.target.parentElement.innerText);
 	}
 });
-
-
 
 // ? close navbar on clicking anywhere
 todo.addEventListener("click", () => {
